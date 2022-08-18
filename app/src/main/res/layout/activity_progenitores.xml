@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProgenitoresActivity"
+    android:layout_marginHorizontal="30dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_marginVertical="20dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_gravity="start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre padre" />
+
+        <EditText
+            android:id="@+id/nombrePadre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapSentences"
+            />
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lugar nacimiento padre" />
+
+        <EditText
+            android:id="@+id/lugarNacPadre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapSentences" />
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha nacimiento padre" />
+
+        <EditText
+            android:layout_gravity="start"
+            android:id="@+id/fechaNacPadre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Padre fallecido" />
+
+        <RadioGroup
+            android:layout_gravity="start"
+            android:id="@+id/padreFallecido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/padreFallecidoSi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Si" />
+
+            <RadioButton
+                android:id="@+id/padreFallecidoNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+
+        <TextView
+            android:layout_gravity="start"
+            android:layout_marginTop="40dp"
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre madre" />
+
+
+
+        <EditText
+            android:id="@+id/nombreMadre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapSentences" />
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lugar nacimiento madre" />
+
+        <EditText
+            android:id="@+id/lugarNacMadre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textCapSentences" />
+
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha nacimiento madre" />
+
+        <EditText
+            android:layout_gravity="start"
+            android:id="@+id/fechaNacMadre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date" />
+
+        <TextView
+            android:layout_gravity="start"
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Madre fallecida" />
+
+        <RadioGroup
+            android:layout_gravity="start"
+            android:id="@+id/madreFallecida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/madreFallecidaSi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Si" />
+
+            <RadioButton
+                android:id="@+id/madreFallecidaNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/enviarDatosProgenitores"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="Enviar"
+            android:onClick="RegistrarProgenitores">
+
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
