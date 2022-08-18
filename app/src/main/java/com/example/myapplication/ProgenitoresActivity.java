@@ -3,6 +3,7 @@ package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,7 +24,7 @@ public class ProgenitoresActivity extends AppCompatActivity {
     private String np, nm, lnp, lnm, fnp, fnm;
     private int pf, mf;
     private AdminSQLiteOpenHelper admin;
-    private SQLiteDatabase db;
+    private SQLiteDatabase db_read, db_write;
 
 
     @Override
@@ -57,12 +58,9 @@ public class ProgenitoresActivity extends AppCompatActivity {
         madreFallecida.check(R.id.madreFallecidaNo);
 
         admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
-        db = admin.getWritableDatabase();
+        db_write = admin.getWritableDatabase();
+        db_read = admin.getReadableDatabase();
 
-        db.execSQL(AdminSQLiteOpenHelper.DROP_USUARIOS);
-        db.execSQL(AdminSQLiteOpenHelper.DROP_PROGENITORES);
-        db.execSQL(AdminSQLiteOpenHelper.CREATE_USUARIOS);
-        db.execSQL(AdminSQLiteOpenHelper.CREATE_PROGENITORES);
     }
 
     public void RegistrarProgenitores(View view){
@@ -76,6 +74,7 @@ public class ProgenitoresActivity extends AppCompatActivity {
         }
 
 
+        /*
         ContentValues usuario = new ContentValues();
         usuario.put("id", idUsuario);
         usuario.put("username", username);
@@ -93,12 +92,29 @@ public class ProgenitoresActivity extends AppCompatActivity {
         madre.put("fallecido",mf);
         madre.put("lugar_nac",lnm);
         madre.put("fecha_nac",fnm);
-        madre.put("id_usuario",idUsuario);
+        madre.put("id_usuario",idUsuario);*/
 
+        Cursor fila = db_read.rawQuery
+                ("select * from progenitores where id_usuario = " + idUsuario, null);
+
+        boolean check = fila.moveToFirst();
+        if(check)  MainActivity.showAlert(view.getContext(), "DATABASE INFO MESSAGE", "Progenitores ya cargados en la BD");
+        else {
+            MainActivity.showAlert(view.getContext(), "DATABASE INFO MESSAGE", "Progenitores insertados exitosamente en la BD");
+            cleanFields();
+        }
+        db_write.execSQL(insertUsuarioString(idUsuario, username));
+        db_write.execSQL(insertProgenitorString(np, pf, lnp, fnp, idUsuario));
+        db_write.execSQL(insertProgenitorString(nm, mf, lnm, fnm, idUsuario));
+
+
+        /*
         long usuarioOk = db.insert("usuarios", null, usuario);
         long padreOk = db.insert("progenitores", null, padre);
         long madreOk = db.insert("progenitores", null, madre);
+        */
 
+        /*
 
         if(usuarioOk != -1 && padreOk != -1 && madreOk != -1){
             MainActivity.showAlert(view.getContext(), "DATABASE INFO MESSAGE", "Progenitores correctly inserted into DB");
@@ -108,8 +124,15 @@ public class ProgenitoresActivity extends AppCompatActivity {
         else{
             MainActivity.showAlert(view.getContext(), "DATABASE ERROR", "An error occurred when inserting data");
             return;
-        }
+        }*/
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        db_write.close();
+        db_read.close();
     }
 
     public boolean checkFields(){
@@ -144,5 +167,23 @@ public class ProgenitoresActivity extends AppCompatActivity {
         fechaNacMadre.setText("");
         padreFallecido.clearCheck();
         madreFallecida.clearCheck();
+    }
+
+    public String insertUsuarioString(int id, String username){
+        String cmd;
+        cmd = "INSERT OR REPLACE INTO usuarios VALUES (" + id + ", " + "'" + username + "'" + ")";
+        return cmd;
+    }
+
+    public String insertProgenitorString(String nombre, int fallecido, String lugar, String fecha, int idUsuario){
+        String cmd;
+        cmd = "INSERT OR REPLACE INTO progenitores VALUES ("
+                + "null, "
+                + "'" + nombre + "'" + ", "
+                + fallecido + ", "
+                + "'" + lugar + "'" + ", "
+                + "'" + fecha + "'" + ", "
+                + idUsuario + ");";
+        return cmd;
     }
 }
